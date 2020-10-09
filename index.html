@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html dir="rtl" lang="ar">
+<head>
+    <meta charset="UTF-8">
+    <style>
+    table, th, td {
+    border: 1px solid red;
+    border-collapse: collapse;
+}
+        
+ tr {
+        font-size: 20px;    
+    }
+    </style>
+ </head>
+<body>
+<h2>الحدود الدنيا 2018-2019</h2>
+    
+<form>
+    <input type="text" name="rate" placeholder="المجموع او المعدل">
+    <select name="se">
+    <option value="1">أحيائي</option>
+    <option value="2">تطبيقي</option>
+    <option value="3">أدبي</option>
+    <option value="4">الكل</option>
+    </select>
+    <button type="submit">بحث</button>
+    
+</form>
+
+<table style="width:100%">
+  <tr>
+    <th>ت</th>
+    <th>الكلية</th> 
+    <th>الحد الادنى</th>
+    <th>المعدل</th>
+    <th>الفرع</th>
+  </tr>
+ 
+</table>
+    
+<script>
+    document.forms[0].addEventListener('submit',(e) => {
+        e.preventDefault();
+        var xhttp = new XMLHttpRequest();
+        xhttp.onreadystatechange = function() {
+        if (this.readyState == 4 && this.status == 200) {
+        var ob = JSON.parse(this.responseText);
+            console.log(ob);
+            ob.map((key,index) => {
+                
+               
+                       var tr = document.createElement("tr"); 
+                tr.innerHTML = "<td>"+key.sex+"</td>";
+                tr.innerHTML += "<td>"+key.co+"</td>";
+                tr.innerHTML += "<td>"+key.total+"</td>";
+                tr.innerHTML += "<td>"+key.rate+"</td>";
+                tr.innerHTML += "<td>"+key.sect+"</td>";
+                document.getElementsByTagName('table')[0].appendChild(tr);
+                
+             
+            });
+      }
+  }
+  xhttp.open("POST", "get");
+  xhttp.send(new FormData(this));
+    });
+    
+</script>
+
+</body>
+</html>
