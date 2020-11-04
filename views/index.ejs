@@ -75,7 +75,7 @@
             });
       }
   }
-  xhttp.open("POST", "get");
+  xhttp.open("POST", "/get/?year=<%=y%>");
   xhttp.setRequestHeader('Content-type', 'application/x-www-form-urlencoded');
   xhttp.send('se='+document.forms[0].se.value+'&rate='+document.forms[0].rate.value);
     });

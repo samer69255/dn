@@ -2,8 +2,12 @@ var express = require('express');
 var router = express.Router();
 
 /* GET home page. */
+router.get('/2019', function(req, res, next) {
+  res.render('index', { title: 'Express', y:2019 });
+});
+
 router.get('/', function(req, res, next) {
-  res.render('index', { title: 'Express' });
+  res.render('index', { title: 'Express', y:2020 });
 });
 
 
@@ -20,6 +24,7 @@ router.post('/get', (req, res) => {
             var fl = {t:rate, se:se};
         else
             fl = {r:rate, se:se}
+		if (req.query.year == 2019) fl.y = 2019; else fl.y = 2020;
         console.log(fl);
         
         search(fl, function(Res) {
@@ -40,7 +45,7 @@ router.post('/get', (req, res) => {
 
 function search(qs, call) {
     var fs = require("fs");
-    fs.readFile('./2019.json', onread);
+    fs.readFile(`./${qs.y}.json`, onread);
 
 
 function onread(err, ob) {
